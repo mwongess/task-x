@@ -1,13 +1,12 @@
 import React from "react"
+import { FaPlus } from 'react-icons/fa';
 
 export const Form: React.FC = () =>{
     return(
         <div>
             <form action="">
                 <input type="text" placeholder="Title" />
-                <textarea name="" id="" cols={30} rows={10}></textarea>
-                <input type="date" />
-                <button>Add New Todo</button>
+                <button> <FaPlus/> Add Task</button>
             </form>
         </div>
     )
