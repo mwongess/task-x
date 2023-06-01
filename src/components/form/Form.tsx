@@ -1,13 +1,13 @@
-import React from "react"
+import { Form } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 
-export const Form: React.FC = () =>{
+export const NewTask: React.FC = () =>{
     return(
         <div>
-            <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Title" />
+            <Form method='post' action=''>
+                <input type="text" name="" placeholder="Title" />
                 <button> <FaPlus/> Add Task</button>
-            </form>
+            </Form>
         </div>
     )
 }
