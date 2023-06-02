@@ -1,11 +1,12 @@
-import './App.css'
-import { SideNav } from './components/sidenav/SideNav'
-import { TodoProvider } from './contexts/context'
+import { RouterProvider } from "react-router-dom";
+import { TodoProvider } from "./contexts/context";
+import { router } from "./routes/routes";
+import "./App.css";
 
 function App() {
-      <TodoProvider>
-        <SideNav/>
-      </TodoProvider>
+  <TodoProvider>
+    <RouterProvider router={router} />
+  </TodoProvider>;
 }
 
-export default App
+export default App;
