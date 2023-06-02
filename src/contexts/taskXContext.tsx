@@ -1,10 +1,11 @@
 import React, {ReactNode, createContext, useContext, useState } from "react";
 import { TaskX, TaskXContextType } from "../types/types";
 
-export const TaskXContext= createContext<TaskXContextType | undefined >(undefined)
-export const useTodoContext = useContext(TaskXContext)
+export const TaskXContext= createContext<TaskXContextType | undefined >(undefined) //Create TaskX Context
 
-export const TodoProvider:React.FC<{ children: ReactNode }> = ({children})=>{
+export const useTaskXContext = useContext(TaskXContext) //Custom Hook
+
+export const TaskXProvider:React.FC<{ children: ReactNode }> = ({children})=>{
     const [tasks, setTasks] = useState<TaskX[]>([])
 
     const addTaskX = (taskX: TaskX)=>{}
