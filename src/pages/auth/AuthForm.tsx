@@ -2,13 +2,11 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Form } from "react-router-dom";
 import { useState } from "react";
 
-export const Auth = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoginMode, setIsLoginMode] = useState(true);
+export const AuthForm = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
-  const handleToggleShowPassword = () => {
-    setShowPassword((prevState) => !prevState);
-  };
+  const handleToggleShowPassword = (): boolean => setShowPassword((prevState) => !prevState) as unknown as boolean;
 
   return (
     <>
