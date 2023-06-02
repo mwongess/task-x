@@ -3,10 +3,10 @@ import { TodoProvider } from "./contexts/context";
 import { router } from "./routes/routes";
 import "./App.css";
 
-function App() {
-  <TodoProvider>
-    <RouterProvider router={router} />
-  </TodoProvider>;
-}
-
-export default App;
+export const App:React.FC = () => {
+  return (
+      <TodoProvider>
+        <RouterProvider router={router} />
+      </TodoProvider>
+  );
+};

@@ -1,4 +1,4 @@
-export const DashboardLayout = () => {
+export const DashboardLayout:React.FC = () => {
     return (
         <div>DashboardLayout</div>
     )
