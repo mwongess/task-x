@@ -5,26 +5,11 @@ import { useState } from "react";
 export const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [formData, setFormData] = useState<{ email: string; password: string }>(
-    {
-      email: "",
-      password: "",
-    }
-  );
 
-  const onSubmit = async () => {
-    try {
-      const auth = getAuth();
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      const user = userCredential.user;
-    } catch (error) {
-      console.error(error);
-    }
+  const handleToggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
+
   return (
     <>
       <div className="auth-form">
@@ -45,6 +30,23 @@ export const Auth = () => {
   );
 };
 
-const authFormAction = ()=> {
-
-}
+export const authFormAction = async ({ request }: { request: any }) => {
+  try {
+    const data = await request.formData();
+    const submission: { name: string; email: string; password: string } = {
+      name: data.get("name"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    console.log(submission);
+    const auth = getAuth();
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      submission.email,
+      submission.password
+    );
+    const user = userCredential.user;
+  } catch (error) {
+    console.error(error);
+  }
+};
