@@ -1,6 +1,6 @@
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { HomeLayout } from "../layouts/HomeLayout";
-import { AuthForm } from "../pages/auth/AuthForm";
+import { AuthForm, authFormAction } from "../pages/auth/AuthForm";
 import {
   Route,
   createBrowserRouter,
@@ -10,7 +10,7 @@ import {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<HomeLayout />}>
-      <Route path="auth/:mode" element={<AuthForm />} action={authFormAction} />
+      <Route path="auth/" element={<AuthForm />} action={authFormAction} />
       <Route path="dashboard" element={<DashboardLayout />}>
         <Route path="task/new" />
       </Route>
