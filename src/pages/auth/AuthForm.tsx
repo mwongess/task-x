@@ -1,5 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Form } from "react-router-dom";
+import { Form, useActionData, useParams } from "react-router-dom";
 import { useState } from "react";
 
 export const AuthForm:React.FC = () => {
@@ -7,11 +7,13 @@ export const AuthForm:React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
   const handleToggleShowPassword = (): boolean => setShowPassword((prevState) => !prevState) as unknown as boolean;
-
+  const {mode} = useParams() as {mode: string}
+  mode === 'login' ? setIsLoginMode(true) : setIsLoginMode(false)
+  
   return (
     <>
       <div className="auth-form">
-        <Form action="/auth" method="post">
+        <Form method="post">
           {!isLoginMode && <input type="text" placeholder="Name" />}
           <input type="text" placeholder="Email" />
           <div className="auth-password">
@@ -28,7 +30,7 @@ export const AuthForm:React.FC = () => {
   );
 };
 
-export const authFormAction = async ({ request }: { request: any }) => {
+export const authFormAction = async ({ request}: { request: any}) => {
   try {
     const data = await request.formData();
     const submission: { name: string; email: string; password: string } = {
@@ -44,6 +46,7 @@ export const authFormAction = async ({ request }: { request: any }) => {
       submission.password
     );
     const user = userCredential.user;
+    return {}
   } catch (error) {
     console.error(error);
   }
