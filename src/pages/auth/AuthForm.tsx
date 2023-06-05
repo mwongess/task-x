@@ -1,15 +1,22 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Form, useActionData, useParams } from "react-router-dom";
+import {
+  Form,
+  Link,
+  redirect,
+  useActionData,
+  useParams,
+} from "react-router-dom";
 import { useState } from "react";
 
-export const AuthForm:React.FC = () => {
+export const AuthForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
-  const handleToggleShowPassword = (): boolean => setShowPassword((prevState) => !prevState) as unknown as boolean;
-  const {mode} = useParams() as {mode: string}
-  mode === 'login' ? setIsLoginMode(true) : setIsLoginMode(false)
-  
+  const handleToggleShowPassword = (): boolean =>
+    setShowPassword((prevState) => !prevState) as unknown as boolean;
+  const { mode } = useParams() as { mode: string };
+  mode === "login" ? setIsLoginMode(true) : setIsLoginMode(false);
+
   return (
     <>
       <div className="auth-form">
@@ -24,13 +31,21 @@ export const AuthForm:React.FC = () => {
             {/* Icon to toggle show password */}
           </div>
           <button>{isLoginMode ? "Login" : "Signup"}</button>
+          <p>
+            <span>
+              Have an account ? <Link to="auth/login">Login</Link>
+            </span>
+            <span>
+              Dont have an account ? <Link to="auth/signup"></Link>
+            </span>
+          </p>
         </Form>
       </div>
     </>
   );
 };
 
-export const authFormAction = async ({ request}: { request: any}) => {
+export const authFormAction = async ({ request }: { request: any }) => {
   try {
     const data = await request.formData();
     const submission: { name: string; email: string; password: string } = {
@@ -46,7 +61,7 @@ export const authFormAction = async ({ request}: { request: any}) => {
       submission.password
     );
     const user = userCredential.user;
-    return {}
+    return redirect("");
   } catch (error) {
     console.error(error);
   }
