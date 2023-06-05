@@ -1,32 +1,49 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  Form,
-  Link,
-  redirect,
-  useActionData,
-  useParams,
-} from "react-router-dom";
+import { Form, Link, redirect, useActionData } from "react-router-dom";
 import { useState } from "react";
 
 export const AuthForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
+  //Returned values from action
+  const dataFromAction = useActionData() as { message: string };
+  let message = "";
+  if (dataFromAction) {
+    message = dataFromAction.message;
+  }
+
+  // Show/Hide password
   const handleToggleShowPassword = (): boolean =>
     setShowPassword((prevState) => !prevState) as unknown as boolean;
-  const { mode } = useParams() as { mode: string };
-  mode === "login" ? setIsLoginMode(true) : setIsLoginMode(false);
+
+  // Set the Auth mode
+  const switchAuthMode = () => {
+    setIsLoginMode((prevState) => !prevState);
+  };
 
   return (
     <>
       <div className="auth-form">
         <Form method="post">
-          {!isLoginMode && <input type="text" placeholder="Name" />}
-          <input type="text" placeholder="Email" />
+          <div>
+            <p>{message}</p>
+          </div>
+          {!isLoginMode && <input type="text" name="name" placeholder="Name" />}
+          <input type="text" name="email" placeholder="Email" />
           <div className="auth-password">
             <input
               type={showPassword ? "password" : "text"}
+              name="password"
               placeholder="Password"
+            />
+            {/* Icon to toggle show password */}
+          </div>
+          <div className="auth-password">
+            <input
+              type={showPassword ? "password" : "text"}
+              name="password"
+              placeholder="Confirm Password"
             />
             {/* Icon to toggle show password */}
           </div>
@@ -34,12 +51,18 @@ export const AuthForm: React.FC = () => {
           <p>
             {!isLoginMode && (
               <span>
-                Have an account ? <Link to="auth/login">Login</Link>
+                Have an account ?{" "}
+                <Link to="/auth/login" onClick={switchAuthMode}>
+                  Login
+                </Link>
               </span>
             )}
             {isLoginMode && (
               <span>
-                Dont have an account ? <Link to="auth/signup"></Link>
+                Dont have an account ?{" "}
+                <Link to="/auth/signup" onClick={switchAuthMode}>
+                  Sign up
+                </Link>
               </span>
             )}
           </p>
@@ -57,15 +80,19 @@ export const authFormAction = async ({ request }: { request: any }) => {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log(submission);
-    const auth = getAuth();
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      submission.email,
-      submission.password
-    );
-    const user = userCredential.user;
-    return redirect("");
+    // const auth = getAuth();
+    // const userCredential = await createUserWithEmailAndPassword(
+    //   auth,
+    //   submission.email,
+    //   submission.password
+    // );
+    // const user = userCredential.user;
+
+    if (!submission.email || !submission.password) {
+      return { message: "Inputs cannot be empty!!" };
+    }
+
+    return redirect("/dashboard");
   } catch (error) {
     console.error(error);
   }

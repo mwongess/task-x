@@ -1,3 +1,4 @@
+import { NewTask } from "../components/form/Form";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { HomeLayout } from "../layouts/HomeLayout";
 import { AuthForm, authFormAction } from "../pages/auth/AuthForm";
@@ -12,7 +13,7 @@ export const router = createBrowserRouter(
     <Route path="/" element={<HomeLayout />}>
       <Route path="auth/:mode" element={<AuthForm />} action={authFormAction} />
       <Route path="dashboard" element={<DashboardLayout />}>
-        <Route path="task/new" />
+        <Route  path="task/new" element={<NewTask/>}/>
       </Route>
     </Route>
   )

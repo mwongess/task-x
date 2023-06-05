@@ -6,8 +6,8 @@ export interface TaskX {
 }
 
 export interface TaskXContextType {
-  todos: TaskX[];
-  addTask: (todo: TaskX) => void;
+  taskX: TaskX[];
+  addTask: (taskX: TaskX) => void;
   updateTask: (id: string) => void;
   deleteTask: (id: string) => void
 }
