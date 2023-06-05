@@ -32,12 +32,16 @@ export const AuthForm: React.FC = () => {
           </div>
           <button>{isLoginMode ? "Login" : "Signup"}</button>
           <p>
-            <span>
-              Have an account ? <Link to="auth/login">Login</Link>
-            </span>
-            <span>
-              Dont have an account ? <Link to="auth/signup"></Link>
-            </span>
+            {!isLoginMode && (
+              <span>
+                Have an account ? <Link to="auth/login">Login</Link>
+              </span>
+            )}
+            {isLoginMode && (
+              <span>
+                Dont have an account ? <Link to="auth/signup"></Link>
+              </span>
+            )}
           </p>
         </Form>
       </div>
