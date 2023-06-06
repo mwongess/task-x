@@ -52,7 +52,7 @@ export const AuthForm: React.FC = () => {
             {!isLoginMode && (
               <span>
                 Have an account ?{" "}
-                <Link to="/auth/login" onClick={switchAuthMode}>
+                <Link to="/auth" onClick={switchAuthMode}>
                   Login
                 </Link>
               </span>
@@ -60,7 +60,7 @@ export const AuthForm: React.FC = () => {
             {isLoginMode && (
               <span>
                 Dont have an account ?{" "}
-                <Link to="/auth/signup" onClick={switchAuthMode}>
+                <Link to="/auth" onClick={switchAuthMode}>
                   Sign up
                 </Link>
               </span>

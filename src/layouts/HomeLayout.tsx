@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 export const HomeLayout: React.FC = () => {
   return (
     <>
-      <div>HomeLayout</div>
+      <div className="text-lg font-medium">HomeLayout</div>
       <Outlet />
     </>
   );

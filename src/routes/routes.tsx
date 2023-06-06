@@ -11,7 +11,7 @@ import {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<HomeLayout />}>
-      <Route path="auth/:mode" element={<AuthForm />} action={authFormAction} />
+      <Route path="auth" element={<AuthForm />} action={authFormAction} />
       <Route path="dashboard" element={<DashboardLayout />}>
         <Route  path="task/new" element={<NewTask/>}/>
       </Route>
