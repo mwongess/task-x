@@ -6,8 +6,9 @@ export interface TaskX {
 }
 
 export interface TaskXContextType {
-  taskX: TaskX[];
+  tasks: TaskX[];
+  setTasks: React.Dispatch<React.SetStateAction<TaskX[]>>
   addTask: (taskX: TaskX) => void;
   updateTask: (id: string) => void;
-  deleteTask: (id: string) => void
+  deleteTask: (id: string) => void;
 }
