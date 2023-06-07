@@ -1,14 +1,14 @@
-export interface TaskX {
+export interface ITaskX {
   id: string;
   title: string;
+  startedOn: string;
   description: string;
-  date: string;
 }
 
-export interface TaskXContextType {
-  tasks: TaskX[];
-  setTasks: React.Dispatch<React.SetStateAction<TaskX[]>>
-  addTask: (taskX: TaskX) => void;
+export interface ITaskXContextType {
+  tasks: ITaskX[];
+  setTasks: React.Dispatch<React.SetStateAction<ITaskX[]>>
+  addTask: (taskX: ITaskX) => void;
   updateTask: (id: string) => void;
   deleteTask: (id: string) => void;
 }
